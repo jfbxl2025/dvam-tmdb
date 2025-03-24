@@ -76,7 +76,11 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.okhttp)
     implementation(libs.converter.moshi)
-
+    implementation(libs.logging.interceptor)
+//    implementation (libs.retrofit2.converter.gson)
+    //coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

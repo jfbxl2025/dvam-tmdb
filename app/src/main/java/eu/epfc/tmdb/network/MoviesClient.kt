@@ -8,10 +8,11 @@ import retrofit2.http.Query
 
 interface MoviesClient {
 
-    @GET("/{version}/movie/popular")
+    @GET("movie/top_rated")
     suspend fun getPopular(
-        @Path("version") version: Int = TmdbService.DEFAULT_VERSION,
+//        @Path("version") version: Int = TmdbService.DEFAULT_VERSION,
         @Query("page") page: Int,
-        @Query("api_key") apiKey: String =  TmdbService.API_KEY
+        @Query("api_key") apiKey: String =  TmdbService.API_KEY,
+        @Query("language") language: String =  "fr-FR",
     ): Response<Movie>
 }
