@@ -1,34 +1,41 @@
 package eu.epfc.tmdb.network.model
 
+//import com.squareup.moshi.Json
 import com.squareup.moshi.Json
+import retrofit2.http.Field
+
+private const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185"
 
 data class Movie(
-    @Json(name = "id")
+    @field:Json(name = "id")
     val id: Int = 0,
-    @Json(name = "overview")
+    @field:Json(name = "overview")
     val overview: String = "",
-    @Json(name = "original_language")
+    @field:Json(name = "original_language")
     val originalLanguage: String = "",
-    @Json(name = "original_title")
+    @field:Json(name = "original_title")
     val originalTitle: String = "",
-    @Json(name = "video")
+    @field:Json(name = "video")
     val video: Boolean = false,
-    @Json(name = "title")
+    @field:Json(name = "title")
     val title: String = "",
-    @Json(name = "genre_ids")
+    @field:Json(name = "genre_ids")
     val genreIds: List<Int> = emptyList(),
-    @Json(name = "poster_path")
+    @field:Json(name = "poster_path")
     val posterPath: String?,
-    @Json(name = "backdrop_path")
+    @field:Json(name = "backdrop_path")
     val backdropPath: String?,
-    @Json(name = "release_date")
+    @field:Json(name = "release_date")
     val releaseDate: String = "",
-    @Json(name = "popularity")
+    @field:Json(name = "popularity")
     val popularity: Double = 0.0,
-    @Json(name = "vote_average")
+    @field:Json(name = "vote_average")
     val voteAverage: Double = 0.0,
-    @Json(name = "adult")
+    @field:Json(name = "adult")
     val adult: Boolean = false,
-    @Json(name = "vote_count")
+    @field:Json(name = "vote_count")
     val voteCount: Int = 0
-)
+){
+    val poster: String
+        get() = "$BASE_IMAGE_URL${posterPath}"
+}

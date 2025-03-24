@@ -24,11 +24,12 @@ class MoviesPagingSource( private val client: MoviesClient): PagingSource<Int, M
                 if (position > 20) {
                     null
                 } else {
+                    Log.i("***PagingSource. load", "$position  -  ${params.loadSize} ")
                     position + (params.loadSize / NETWORK_PAGE_SIZE)
                 }
 
             }
-            Log.i("length***", movies.count().toString())
+//            Log.i("length***", movies.count().toString())
             LoadResult.Page(
                 data = movies,
                 prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
