@@ -5,11 +5,11 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import eu.epfc.tmdb.data.MoviesRepository.Companion.NETWORK_PAGE_SIZE
 import eu.epfc.tmdb.data.MoviesRepository.Companion.STARTING_PAGE_INDEX
-import eu.epfc.tmdb.network.MoviesClient
+import eu.epfc.tmdb.network.TmdbClient
 import eu.epfc.tmdb.network.model.Movie
 
 
-class MoviesPagingSource( private val client: MoviesClient): PagingSource<Int, Movie>() {
+class MoviesPagingSource( private val client: TmdbClient): PagingSource<Int, Movie>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int,Movie> {
         val position = params.key ?: STARTING_PAGE_INDEX

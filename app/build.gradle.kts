@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
 }
 
 
@@ -19,6 +20,7 @@ android {
         val keystoreProperties = Properties()
         keystoreProperties.load(keystoreFile.inputStream())
         val tmdbApiKey= keystoreProperties["TMDB_API_KEY"] ?: ""
+        val tmdbAccessToken= keystoreProperties["TMDB_ACCESS_TOKEN"] ?: ""
 
         applicationId = "eu.epfc.tmdb"
         minSdk = 28
@@ -30,9 +32,16 @@ android {
 
         buildConfigField(
             type = "String" ,
+            name = "TMDB_ACCESS_TOKEN" ,
+            value = tmdbAccessToken as String
+        )
+
+        buildConfigField(
+            type = "String" ,
             name = "TMDB_API_KEY" ,
             value = tmdbApiKey as String
         )
+
     }
 
     buildTypes {
@@ -72,12 +81,19 @@ dependencies {
     //pager
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.androidx.paging.compose)
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
     // retrofit
     implementation(libs.retrofit)
     implementation(libs.okhttp)
     implementation(libs.converter.moshi)
     implementation(libs.logging.interceptor)
-//    implementation (libs.retrofit2.converter.gson)
+    //moshi
+    implementation(libs.squareup.moshi.kotlin)
+    implementation (libs.moshi)
+    implementation (libs.retrofit2.converter.gson)
+    implementation (libs.google.gson)
     //coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
