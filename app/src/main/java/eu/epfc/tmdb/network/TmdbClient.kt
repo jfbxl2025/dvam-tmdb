@@ -4,6 +4,7 @@ import eu.epfc.tmdb.network.model.Details
 import eu.epfc.tmdb.network.model.Favorite
 import eu.epfc.tmdb.network.model.Movie
 import eu.epfc.tmdb.network.model.Page
+import eu.epfc.tmdb.network.model.RequestToken
 import eu.epfc.tmdb.network.model.Result
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,6 +13,9 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TmdbClient {
+
+    @GET("authentication/token/new ")
+    suspend fun getRequestToken(): RequestToken
 
     @GET("movie/popular")
     suspend fun getPopular(

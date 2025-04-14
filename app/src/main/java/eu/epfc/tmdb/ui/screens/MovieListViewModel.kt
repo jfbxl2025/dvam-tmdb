@@ -10,15 +10,15 @@ import eu.epfc.tmdb.data.MoviesRepository
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class MoviesViewModel(private val moviesRepository: MoviesRepository, private val favoritesRepository: FavoritesRepository): ViewModel() {
+class MovieListViewModel(private val moviesRepository: MoviesRepository, private val favoritesRepository: FavoritesRepository): ViewModel() {
 
-    private lateinit var _favorites: List<Int>
+//    private lateinit var _favorites: List<Int>
 
-    init {
-        viewModelScope.launch {
-            _favorites = favoritesRepository.getIds()
-        }
-    }
+//    init {
+//        viewModelScope.launch {
+//            _favorites = favoritesRepository.getIds()
+//        }
+//    }
 
     private val _popular = moviesRepository.getPopular().cachedIn(viewModelScope).map { pagingData ->
         pagingData.map {
@@ -29,13 +29,13 @@ class MoviesViewModel(private val moviesRepository: MoviesRepository, private va
         voteCount = it.voteCount,
         popularity = it.popularity,
         poster = it.poster,
-        favorite = _favorites.contains(it.id)
+        favorite = false // _favorites.contains(it.id)
             )
         }
     }
 
     fun getPopular() = _popular
-    val favorites = mutableStateOf(_favorites)
+//    val favorites = mutableStateOf(_favorites)
 
 //    val popular: Flow<PagingData<Movie>>
 //        get() = moviesRepository.getPopular().cachedIn(viewModelScope)

@@ -1,42 +1,58 @@
 package eu.epfc.tmdb.ui.screens
 
+
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import eu.epfc.tmdb.network.model.Movie
+
 import eu.epfc.tmdb.ui.TmdbViewModelProvider
 import eu.epfc.tmdb.ui.components.MovieCard
 import eu.epfc.tmdb.ui.components.TmdbScaffold
 
 
+
+
 @Composable
-fun PopularMoviesScreen (
-    navigateToMovieDetail: (Int) ->Unit,
+fun MovieListScreen (
+    navigateToMovieDetail: (Pair<Int, Boolean>) -> Unit,
     movieListViewModel: MovieListViewModel = viewModel(factory = TmdbViewModelProvider.Factory),
     modifier: Modifier = Modifier
-){
-    val movies = movieListViewModel.getPopular().collectAsLazyPagingItems()
+) {
 
     TmdbScaffold(
-        title = "Popular"
+        title = "Home screen"
     ) {
+
+        val movies = movieListViewModel.getPopular().collectAsLazyPagingItems()
+
         LazyColumn(
-//            state = moviesViewModel.lazyListState,
             modifier = modifier.padding(it)
         ) {
-            items(movies.itemCount) { index ->
+
+            items(
+                movies.itemCount,
+//                key = movies.itemKey { it.id}
+            ) { index ->
                 movies[index]?.let { movie ->
                     MovieCard(
                         index = index,
                         movie = movie,
-                        onMovieClick = { navigateToMovieDetail(movie.id) }
+                        onMovieClick = { navigateToMovieDetail(Pair(movie.id, movie.favorite)) }
                     )
                 }
             }
         }
+
     }
+
+
 }
+
+
+
+
 

@@ -26,13 +26,13 @@ class MovieDetailsViewModel(
 
     init {
         viewModelScope.launch {
-                try {
+            try {
                  details.value = movieRepository.getDetails(movieId)
             }
             catch (e:Exception) {
                 Log.e("detail VM",e.message ?: "error")
             }
-            }
+        }
     }
 
 

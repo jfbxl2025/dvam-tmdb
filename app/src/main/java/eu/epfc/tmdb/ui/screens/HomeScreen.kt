@@ -18,7 +18,7 @@ import eu.epfc.tmdb.ui.components.TmdbScaffold
 @Composable
 fun HomeScreen (
     navigateToMovieDetail: (Pair<Int, Boolean>) -> Unit,
-    moviesViewModel: MoviesViewModel = viewModel(factory = TmdbViewModelProvider.Factory),
+    movieListViewModel: MovieListViewModel = viewModel(factory = TmdbViewModelProvider.Factory),
     modifier: Modifier = Modifier
 ) {
 
@@ -26,7 +26,7 @@ fun HomeScreen (
         title = "Home screen"
     ) {
 
-        val movies = moviesViewModel.getPopular().collectAsLazyPagingItems()
+        val movies = movieListViewModel.getPopular().collectAsLazyPagingItems()
 
         LazyColumn(
             modifier = modifier.padding(it)

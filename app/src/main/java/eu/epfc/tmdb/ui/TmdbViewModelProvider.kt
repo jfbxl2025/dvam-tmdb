@@ -7,14 +7,19 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import eu.epfc.tmdb.TmdbApplication
 import eu.epfc.tmdb.network.TmdbService
+import eu.epfc.tmdb.ui.screens.LoginViewModel
 import eu.epfc.tmdb.ui.screens.MovieDetailsViewModel
-import eu.epfc.tmdb.ui.screens.MoviesViewModel
+import eu.epfc.tmdb.ui.screens.MovieListViewModel
 
 object TmdbViewModelProvider {
         val Factory = viewModelFactory {
+
+            initializer {
+                LoginViewModel(tmdbClient = TmdbService.tmdbClient)
+            }
             initializer {
                 val container = inventoryApplication().container
-                MoviesViewModel(container.moviesRepository, container.favoritesRepository)
+                MovieListViewModel(container.moviesRepository, container.favoritesRepository)
             }
 
             initializer {
