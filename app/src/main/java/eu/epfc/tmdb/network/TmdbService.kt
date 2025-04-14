@@ -1,5 +1,7 @@
 package eu.epfc.tmdb.network
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import eu.epfc.tmdb.BuildConfig
 import eu.epfc.tmdb.network.interceptors.ApiKeyInterceptor
 import eu.epfc.tmdb.network.interceptors.TokenAuthenticator
@@ -7,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 object TmdbService {
@@ -30,8 +33,11 @@ object TmdbService {
             .addInterceptor(logger)
 
             .build()
-//        val jsonConverter = MoshiConverterFactory.create()
-        val jsonConverter = GsonConverterFactory.create()
+        val moshi = Moshi.Builder()
+            .addLast(KotlinJsonAdapterFactory())
+            .build()
+//        val jsonConverter = GsonConverterFactory.create()
+        val jsonConverter = MoshiConverterFactory.create(moshi)
 
         val retrofitBuilder = Retrofit.Builder()
                 .addConverterFactory(jsonConverter)

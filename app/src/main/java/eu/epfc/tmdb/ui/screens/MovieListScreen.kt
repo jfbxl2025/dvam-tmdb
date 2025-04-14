@@ -24,7 +24,7 @@ fun MovieListScreen (
 ) {
 
     TmdbScaffold(
-        title = "Home screen"
+        title = "Movie List screen"
     ) {
 
         val movies = movieListViewModel.getPopular().collectAsLazyPagingItems()

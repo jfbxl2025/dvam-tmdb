@@ -93,6 +93,7 @@ dependencies {
     implementation(libs.squareup.moshi.kotlin)
     implementation (libs.moshi)
     implementation (libs.retrofit2.converter.gson)
+    implementation (libs.converter.moshi)
     implementation (libs.google.gson)
     //coil
     implementation(libs.coil.compose)

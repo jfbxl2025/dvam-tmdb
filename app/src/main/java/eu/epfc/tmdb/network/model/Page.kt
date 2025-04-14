@@ -1,22 +1,21 @@
 package eu.epfc.tmdb.network.model
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 
-//import com.squareup.moshi.Json
 
 data class Page<T>(
-    @SerializedName("page")
+   @Json(name = "page")
     val page: Int,
-    @SerializedName("results")
+   @Json(name = "results")
     val results: List<T>,
-    @SerializedName("total_pages") val totalPages: Int,
-    @SerializedName("total_results") val totalResults: Int
+   @Json(name = "total_pages") val totalPages: Int,
+   @Json(name = "total_results") val totalResults: Int
 
-//    @SerializedName("page")
+//   @Json(name = "page")
 //    val page: Int,
-//    @SerializedName("results")
+//   @Json(name = "results")
 //    val results: List<T>,
-//    @SerializedName("total_pages") val totalPages: Int,
-//    @SerializedName("total_results") val totalResults: Int
+//   @Json(name = "total_pages") val totalPages: Int,
+//   @Json(name = "total_results") val totalResults: Int
 )

@@ -1,15 +1,18 @@
 package eu.epfc.tmdb.ui.screens
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import eu.epfc.tmdb.network.TmdbClient
-import eu.epfc.tmdb.network.TmdbService
 import kotlinx.coroutines.launch
 
-class LoginViewModel (tmdbClient: TmdbClient): ViewModel() {
+class LoginViewModel (val tmdbClient: TmdbClient): ViewModel() {
+
+    val connected  =  mutableStateOf(false)
 
     fun login() {
-
-        viewModelScope.launch { tmdbClient }
+        connected.value = true
+//        viewModelScope.launch { tmdbClient.getRequestToken() }
     }
 }

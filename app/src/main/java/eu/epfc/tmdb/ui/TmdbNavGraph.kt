@@ -34,7 +34,7 @@ fun TmdbNavHost(
         }
         composable<LoginDestination> {
             LoginScreen(
-                navigateToMovieDetail = { navController.navigate(MovieDetailsDestination(movieId = it.first, favorite = it.second )) }
+                navigateToConnected = { navController.navigate(MovieListDestination) }
             )
         }
 
